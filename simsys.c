@@ -86,6 +86,26 @@ long numBlocks() {
     return NUM_BLOCKS;
 }
 
+// DirTree getRootNode() {
+//     return ROOT_DIR;
+// }
+
+// DirTree getWorkDirNode() {
+//     return WORK_DIR;
+// }
+
+// void setWorkDirNode(DirTree node) {
+//     WORK_DIR = node;
+// }
+
+// long blockSize() {
+//     return BLOCK_SIZE;
+// }
+
+// long numBlocks() {
+//     return NUM_BLOCKS;
+// }
+
 long numSectors() {
     return sizeOfLL(MEM_ALLOC) / 2;
 }
@@ -123,11 +143,14 @@ void freeBlock(long blk) {
         /* IN any other case, the free will split the block in two. */
 
         /* The new bounds are computed (mLo and mHi represent the freed block) */
-        long *mLo = (long*) malloc(sizeof(long));
         long *mHi = (long*) malloc(sizeof(long));
-
-        *mLo = blk;
+        
+        long *mLo = (long*) malloc(sizeof(long));
+        
         *mHi = blk+1;
+        
+        *mLo = blk;
+        
         
         /* Create a one block gap in the memory by inserting the pair */
         /* [a,b)...[c,d)...[e,f)... ==> [a,b)...[c,mLo)x[mHi, d)... */
